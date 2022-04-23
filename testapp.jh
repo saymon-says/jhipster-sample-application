@@ -1,0 +1,47 @@
+
+application {
+  config {
+    baseName testTask,
+    applicationType monolith,
+    packageName com.myapp,
+    authenticationType oath2,
+    prodDatabaseType postgresql,
+    serverPort 3030, 
+    clientFramework angular
+  }
+  entities People, Orders, Products
+}
+
+entity People {
+	id Long,
+    adress String,
+    email String,
+    password String,
+    name String
+}
+
+entity Orders {
+	id Long,
+    total Long,
+    quantity Long
+}
+
+entity Products {
+	id Long,
+    title String,
+    category String,
+    price BigDecimal
+}
+
+relationship OneToMany {
+	People to Orders{people(id)}
+}
+
+relationship ManyToMany {
+	Orders{product(id)} to Products{order(id)}
+}
+
+paginate * with pagination
+
+dto * with mapstruct
+    
